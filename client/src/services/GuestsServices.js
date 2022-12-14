@@ -21,3 +21,12 @@ export const deleteGuest = (id) => {
     
 }
 
+
+export const putGuest = (payload, id) => {
+    return fetch(baseURL + id + '/edit' , {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json'}
+    })
+    .then(res => res.json())
+}

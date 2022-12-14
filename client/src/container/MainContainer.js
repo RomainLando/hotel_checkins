@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from "../component/Form";
 import GuestList from "../component/GuestList";
-import { getGuests, postGuest, deleteGuest } from "../services/GuestsServices";
+import { getGuests, postGuest, deleteGuest, putGuest } from "../services/GuestsServices";
 
 const MainContainer = () => {
   const [guests, setGuests] = useState([]);
@@ -14,10 +14,17 @@ const MainContainer = () => {
   const removeGuest = (id) => {
     let temp = guests.map(g => g);
     const returnedGuest = temp.find((guest) => guest._id ===id)
-    console.log(returnedGuest)
     temp.splice(temp.indexOf(returnedGuest),1);
     setGuests(temp);
   }
+  const checkGuest = (payload ,id) => {
+    let temp = guests.map(g => g);
+    const tempGuest = temp.find((guest) => guest._id ===id)
+    tempGuest["checkedInStatus"] = payload["checkedInStatus"];
+    setGuests(temp);
+  }
+
+
 
 
   useEffect(() => {
@@ -31,7 +38,12 @@ const MainContainer = () => {
   return (
     <>
       <Form addGuest={addGuest} postGuest={postGuest} />
-      <GuestList allGuests={guests} deleteGuest={deleteGuest} removeGuest={removeGuest} />
+      <GuestList allGuests={guests} 
+      deleteGuest={deleteGuest} 
+      removeGuest={removeGuest} 
+      checkGuest={checkGuest} 
+      putGuest={putGuest}
+      />
     </>
   );
 };
