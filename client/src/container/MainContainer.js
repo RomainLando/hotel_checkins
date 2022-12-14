@@ -29,7 +29,6 @@ const MainContainer = () => {
 
   useEffect(() => {
     getGuests().then((data) => {
-      console.log(data);
       setGuests(data);
     });
   }, []);
